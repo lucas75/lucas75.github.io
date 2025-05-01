@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * { box-sizing: border-box;}
+  </style>
+  <script src="biblio-prototype.js">/* */</script>
+</head>
+<body>
+
+  <h3>Isolation between Bibliographic Index and Formatting</h3>
+
+  <div id="comboOptions" style="position: absolute; visibility: hidden; border: 1pt solid black; background-color: white;">New on @ThisDocument<br>New on @MyDatabase</div>
+
+  <div style="width: 600pt; margin-left: auto; margin-right: auto; background-color: #c0c0c0; border: 1pt solid black;"">
+  
+  <div>
+    <div style="background: linear-gradient(90deg,#c0c0FF,blue); width: 600pt; height: 22pt; vertical-align: middle; display: table-cell; padding-left: 2pt;">
+      Configurations
+    </div>
+    <div>
+      Style:
+      <select id="TheStyle" onchange="DOC.ChangeStyle(this.value)">
+        <option value="">(Select the Style)</option>
+        <option value="authoryear">Author (Year; complement)</option>
+        <option value="num">Numbered</option>
+      </select>
+    </div>
+    <script>
+      document.getElementById('TheStyle').value = DOC.CurrentBibliographicStyle;      
+    </script>
+
+  </div>
+  </div>
+
+  <br>
+
+  <div style="width: 600pt; margin-left: auto; margin-right: auto; background-color: #c0c0c0; border: 1pt solid black;"">
+    <div style="background: linear-gradient(90deg,#c0c0FF,blue); width: 600pt; height: 22pt; vertical-align: middle; display: table-cell; padding-left: 2pt;">
+      Add/Edit Index Entry
+    </div>
+    <div style="display: grid; grid-template-columns: auto auto 1fr;">
+      <div style="padding: 4pt;">
+        Index:<br>
+        <select id="TheIndex">
+          <option>Custom Index 001</option>
+        </select>
+      </div>      
+      <div style="padding: 4pt;">
+        Placement:<br>
+        <select id="Placement" disabled="1" onchange="DIALOG.Refresh()">
+          <option>Manual</option>          
+        </select>
+      </div>
+      <div style="padding: 4pt;">
+        Reference Label:<br>
+        <input id="FormattedLabel" style="width: 100%" disabled="1">
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr auto">
+      <div style="padding: 4pt;">
+        Source:<br>
+        <input id="Source" style="width: 100%"
+          onclick="DIALOG.ComboSearch(this)"
+          onkeyup="DIALOG.ComboSearch(this)"          
+          placeholder="(type to find; click to create)"
+        >        
+      </div>      
+      <div style="padding: 4pt;">
+        Extra Parameters:<br>
+        <input id="ExtraParameters" style="width: 100%" disabled="1"
+          onclick="DIALOG.ChangeExtraParametes(this)"
+          onkeyup="DIALOG.ChangeExtraParametes(this)"                
+        >        
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 100pt">
+      <div style="padding: 4pt;">
+        Index Entry:<br>
+        <textarea id="FormattedIndexEntry" style="width: 100%; height: 50pt;" disabled="1"></textarea>
+      </div>      
+      <div style="padding: 4pt; vertical-align: bottom;">
+        <br>
+        Used NN times        
+      </div>
+    </div>
+    <div style="text-align: right;padding: 4pt;">
+      <button>Add Source..</button>
+      <button>OK</button>
+      <button>Cancel</button>
+    </div>
+  </div>
+  
+  <br>
+
+  <div style="width: 600pt; margin-left: auto; margin-right: auto; background-color: #c0c0c0; border: 1pt solid black;"">
+  
+    <style>
+      * { border-collapse: collapse; }
+      table { border-spacing: 0 }
+      table td { border: 1pt solid gray; margin: 0;}    
+    </style>
+    
+    <table class="s8" id="RESOLUTION">
+      <thead>
+        <tr>
+          <td rowspan="2">Reference Id</td>
+          <td colspan="2">Duplicate Resolution</td>
+        </tr>
+        <tr>
+          <td>Key</td>
+          <td>Counter</td>
+        </tr>        
+      </thead>
+      <tbody>        
+      </tbody>
+    </table>  
+
+    <button onclick="RESOLUTION.Play(RESOLUTION.Animation1Steps)">Play AuthorYear</button>
+    <button onclick="RESOLUTION.Play(RESOLUTION.Animation2Steps)">Play Numeric</button>
+  </div>
+
+
+</body>
+</html>
